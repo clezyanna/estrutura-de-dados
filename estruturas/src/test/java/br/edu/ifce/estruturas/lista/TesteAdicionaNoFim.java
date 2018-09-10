@@ -1,6 +1,7 @@
 package br.edu.ifce.estruturas.lista;
 
 public class TesteAdicionaNoFim {
+	
 	public static void main(String[] args) {
 		ListaLigada lista = new ListaLigada();
 		
@@ -10,3 +11,5 @@ public class TesteAdicionaNoFim {
 		System.out.println(lista);
 	}
 }
+
+

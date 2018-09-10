@@ -1,30 +1,38 @@
-package br.edu.ifce.estruturas.lista;
+package br.edu.ifce.estruturas.listasligadas;
 
-public class ListaLigada {
+
+public class ListaCircular {
 
 	private Celula primeira;
 	private Celula ultima;
 	
 	
 	private int totalDeElementos;
-	
-	public void adiciona(Object elemento) {
-		Celula nova = new Celula(elemento);
+	//add no fim
+	public void adiciona(Celula elemento ) {
 		if (totalDeElementos == 0) {
-			this.primeira = nova;
-			this.ultima = nova;
+			Celula unico = elemento;
+			this.primeira = unico;
+			this.ultima = unico;
+			
+			unico.setAnterior(this.ultima);
+			unico.setProxima(primeira);
+			
+			this.totalDeElementos++;
 		}
 		else{
-			
-		this.ultima.setProxima(nova);
-		this.ultima = nova;
-		
-		this.totalDeElementos++;
+			Celula novoUlt = elemento;
+			novoUlt.setProxima(primeira);
+		    novoUlt.setAnterior(ultima);
+		    this.ultima.setProxima(novoUlt);
+		    this.ultima = novoUlt;
+		    this.totalDeElementos++;
+		    
 	
 	 }
 	}
-	public void adiciona(int posicao, Object elemento) {
-		Celula nova = new Celula(1);
+	/*public void adiciona(int posicao, Object elemento) {
+		Celula nova = new Celula(o1);
 		Celula atual  = primeira;
 		
 		for (int i = 1; i< posicao -1 ;i++) {
@@ -36,17 +44,8 @@ public class ListaLigada {
 		atual.setProxima = nova;
 		this.totalDeElementos++;
 		
-	}
-	
-	public void adicionaNoComeco(Object elemento) {
-		Celula nova = new Celula(this.primeira, elemento);
-		this.primeira = nova;
-		
-		if(this.totalDeElementos == 0) {
-			this.ultima = this.primeira;
-		}
-		this.totalDeElementos++;
-	}
+	}*/
+
 	
 	public Object pega(int posicao) {
 		// implementacao
@@ -77,13 +76,27 @@ public class ListaLigada {
 			
 	}
 	
-	public int tamanho() {
-		// implementacao
-		return 0;
-	}
-	public boolean contem(Object o) {
-		// implementacao
-		return false;
+
+	public void executar(int n) {
+		Celula atual  = this.primeira;
+
+			int aux = 0;
+			do {
+				if(aux == n) {
+					Celula anterior = atual.getAnterior();
+					Celula proxima = atual.getProxima();
+					
+					anterior.setProxima(proxima);
+					proxima.setAnterior(anterior);
+					
+					this.totalDeElementos--;
+					aux = 0;
+					
+					
+			}
+				atual = atual.getProxima();
+				aux++;
+		} while(totalDeElementos !=1);
 	}
 	
 	
@@ -98,15 +111,17 @@ public class ListaLigada {
 		
 		// Percorrendo até o penúltimo elemento
 		for(int i = 0; i < this.totalDeElementos-1; i++) {
-			builder.append(atual.getElemento());
+			builder.append(atual.getNome());
 			builder.append(", ");
 			atual = atual.getProxima();
 		}
 		
 		//último elemento
-		builder.append(atual.getElemento());
+		builder.append(atual.getNome());
 		builder.append("]");
 		
 		return builder.toString();
 	}
 }
+
+
