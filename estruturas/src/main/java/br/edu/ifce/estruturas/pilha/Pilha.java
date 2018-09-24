@@ -3,21 +3,21 @@ package br.edu.ifce.estruturas.pilha;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Pilha {
+public class Pilha<X> {
 	
-	List<Peca> pecas = new LinkedList<Peca>();
+	List<X> elementos = new LinkedList<X>();//LinkedList = 
 	
-	public void inserir(Peca p1) {
-		this.pecas.add(p1);
+	public void inserir(X x) {
+		this.elementos.add(x);
 	}
 	
-	public Peca remover() {
-		return this.pecas.remove(this.pecas.size() - 1);
+	public X remover() {
+		return this.elementos.remove(this.elementos.size() - 1);
 		
 	}
 	
 	public boolean vazia() {
-		return this.pecas.size() == 0;
+		return this.elementos.size() == 0;
 
 		
 	}
